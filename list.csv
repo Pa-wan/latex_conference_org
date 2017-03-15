@@ -1,0 +1,10 @@
+Name,Surname,Institution,email,Presentation Type,Title,Co-authors,Institutions,Abstract
+"John","Doe","Unknown Company","JohnDoe@unknown.com","K","Title of Contribution 1","Jane Doe, Johnny Doe","Evil Corp","\lipsum[1-2]"
+"John","Doe","Unknown Company","JohnDoe@unknown.com","I","Title of Contribution 2","Jane Doe, Pinco Pallino","Evil Corp","\lipsum[1-2]"
+"John","Doe","Unknown Company","JohnDoe@unknown.com","I","Title of Contribution 3","Jane Doe, Tizio, Caio","Evil Corp, Shit Ltd, Universit\`a della Strada","\lipsum[1-2]"
+"John","Doe","Unknown Company","JohnDoe@unknown.com","C","Title of Contribution 4","Jane Doe","Evil Corp","\lipsum[1-2]"
+"John","Doe","Unknown Company","JohnDoe@unknown.com","C","Title of Contribution 5","Jane Doe","Evil Corp","\lipsum[1-2]"
+"John","Doe","Unknown Company","JohnDoe@unknown.com","C","Title of Contribution 6","Jane Doe","Evil Corp","\lipsum[1-2]"
+"John","Doe","Unknown Company","JohnDoe@unknown.com","P","Title of Contribution 7","Jane Doe","Evil Corp","\lipsum[1-2]"
+"John","Doe","Unknown Company","JohnDoe@unknown.com","P","Title of Contribution 8","Jane Doe","Evil Corp","\lipsum[1-2]"
+"John","Doe","Unknown Company","JohnDoe@unknown.com","P","Title of Contribution 9","Jane Doe","Evil Corp","\lipsum[1-2]"

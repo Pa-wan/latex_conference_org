@@ -1,0 +1,146 @@
+\documentclass[12pt,twoside]{book}
+
+% General Packages
+\usepackage[a4paper,scale=0.85]{geometry}
+
+% Packages for abstracts
+\usepackage{needspace}
+\usepackage{marginnote}
+\usepackage{lipsum}
+\usepackage{multicol}
+\renewcommand*{\marginfont}{\sffamily\tiny}
+
+\usepackage{imakeidx}
+\usepackage[colorlinks=false,hidelinks]{hyperref}
+\usepackage{setspace}
+
+\makeindex[intoc]
+
+% Counter for Abstracts
+\newcounter{Abstracts}
+\addtocounter{Abstracts}{1}
+
+% New Abstract Environment
+\newenvironment{conf-abstract}[5][]{%
+  \needspace{10\baselineskip}
+    {\renewcommand\textsuperscript[4]{}
+     \phantomsection\addcontentsline{toc}{section}
+     {\texorpdfstring{#2}{#2}}
+    }
+    {{\scriptsize\bfseries #5\arabic{Abstracts} -- #2}\marginnote{#1}\par}
+    \stepcounter{Abstracts}
+    \smallskip
+    {\scriptsize #3 \textit{#4} \par}
+    \smallskip
+}{%
+  \medskip
+  \hrule
+  \medskip
+}
+
+\usepackage{etoolbox}
+\newcommand{\indexauthors}[1]{%
+  \forcsvlist{\index}{#1}
+}
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{-1}
+\pagestyle{plain}
+
+% Packages for participant list
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{ltablex,booktabs}
+\usepackage{microtype}
+\usepackage{datatool}
+\usepackage{tabularx}
+
+\DTLloaddb{names}{../list.csv}
+\renewcommand*{\arraystretch}{0.65}
+
+\title{Conference Title}
+\author{Other Info}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+% Optional welcome notes to address attendees
+%\chapter{Welcome Notes}
+%Yo, welcome! Have a good time you guys!
+
+\tableofcontents
+
+\mainmatter
+
+% Specify conf-abstract like this:
+%
+% \begin{conf-abstract}[optional text going into the margin note]
+% {Title of Paper}
+% {Authors}
+% {Institutions}
+% {One-letter code for presentation type I: invited, C: contributed, P: poster and so on}
+% Abstract text
+% \end{conf-abstract}
+%
+% It's probably best to generate the abstracts from a 
+% database or via a script.
+% Don't forget to check through for any special characters
+% that need to be escaped/substituted.
+
+% Tiny character, no indentation, small line spacing
+\scriptsize
+\setlength\parindent{0pt}
+\setstretch{0.85}
+ 
+\section{Abstracts}
+
+\begin{multicols}{2}
+
+% These fields depend on the .csv file being read
+\DTLforeach{names}{%
+\name=Name, \surname=Surname, \uni=Institution, \type=Presentation Type, \title=Title, \coauth=Co-authors, \Insts=Institutions, \body=Abstract}
+{%
+\begin{conf-abstract}{\title}{\underline{\name~\surname},~\coauth}{\uni,~\Insts}{\type}
+
+\body
+
+\end{conf-abstract}
+
+}
+
+\end{multicols}
+
+
+\clearpage
+
+
+\section{List of Participants}
+
+\begin{tabularx}{\columnwidth}{>{}c
+    >{\scriptsize}X  %% adjust 8\hsize suitably
+    >{\scriptsize}X  %% adjust 13\hsize suitably 
+    >{\scriptsize}X} %% adjust 12\hsize suitably
+
+\multicolumn{3}{c}{\normalsize{Name}} &  \multicolumn{1}{c}{\normalsize{email}}\\ \toprule
+\endfirsthead
+\multicolumn{3}{c}{\normalsize{Name}} &  \multicolumn{1}{c}{\normalsize{email}}\\ \toprule
+\endhead
+
+% These fields depend on the .csv file being read
+\DTLforeach{names}{
+\name=Name, \surname=Surname, \email=email}
+{%
+\DTLiffirstrow{}{\\}
+  & \surname & \name & \url{\email}
+}
+
+\end{tabularx}%
+
+\backmatter
+\renewcommand{\indexname}{Author Index}
+\printindex
+
+\end{document}

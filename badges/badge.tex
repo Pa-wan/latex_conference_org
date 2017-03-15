@@ -1,0 +1,46 @@
+%%%%
+%
+% ticket.sty example file for a pin for conferences
+%
+%%%%
+% use the corresponding paper size for your ticket definition
+\documentclass[a4paper,10pt]{article}
+
+% load ticket.sty with the appropriate ticket definition
+\usepackage[freepin,cutmark,rowmode]{ticket}
+
+% load misc stuff
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{lscape}
+\usepackage{datatool}
+\DTLloaddb{names}{../list.csv}
+
+% make your default ticket. \ticketdefault is somewhat like a background
+\renewcommand{\ticketdefault}{%
+  \put( 5, 42){\includegraphics[width=60mm]{logos/upper_line.png}}
+  \put(50,  4){\includegraphics[width=15mm]{logos/logo.jpg}}
+  \put( 5, 13){\line(1,0){60}}
+  \put( 7, 10){\scriptsize Conference Name}
+  \put( 7,  7){\scriptsize Place}
+  \put( 7,  4){\scriptsize Date}
+}
+
+
+\newcommand{\confpin}[2]{\ticket{%
+    \put(35,32){\makebox[0mm]{\bfseries\Large #1}}
+    \put(35,24){\makebox[0mm]{\bfseries\large #2}}%
+}}
+
+
+\begin{document}
+
+\sffamily
+
+\DTLforeach{names}{
+\name=Name, \surname=Surname, \uni=Institution}
+{%
+  \confpin{\name~\surname}{\uni}
+}
+
+\end{document}
